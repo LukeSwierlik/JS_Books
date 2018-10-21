@@ -1,0 +1,50 @@
+@import "../utils/variable";
+@import "../utils/mixins";
+
+.filters {
+    @include breakpoint(tablet) {
+        width: $filters-width-tablet;
+        margin-bottom: $filters-margin-bottom-table;
+    }
+
+    padding: $filters-padding-horizontal;
+    width: $filters-width;
+    box-sizing: border-box;
+
+    .filter {
+        margin-bottom: $filter-margin-bottom;
+        border-bottom: $border-height solid $border-color;
+        padding-bottom: $filter-margin-bottom;
+
+        &__title-wrapper {
+            margin-bottom: $filter-title-wrapper-margin-bottom;
+        }
+
+        &__title {
+            font-size: $filter-title-font-size;
+            font-weight: bold;
+        }
+
+        &__pages {
+            width: $filter-pages-width;
+            border-radius: 5$filter-pages-border-radius;
+            border: $border-height solid $border-color;
+            padding: $filter-padding;
+            box-sizing: border-box;
+        }
+    }
+
+    &__clear {
+        border-radius: $filter-clear-border-radius;
+        background-color: $filter-clear-background-color;
+        text-align: center;
+        padding: $filter-clear-padding;
+        margin: $filter-clear-margin;
+        text-decoration: none;
+        border: none;
+        color: $filter-clear-color;
+        display: block;
+        font-weight: bold;
+        cursor: pointer;
+    }
+}

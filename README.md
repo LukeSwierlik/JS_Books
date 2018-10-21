@@ -1,1 +1,29 @@
-# JS_Books
+# BOOKS 
+
+A lightweight foundation for your next webpack based frontend project.
+
+
+### Installation
+
+```
+npm install
+```
+
+### Start Dev Server
+
+```
+npm start
+```
+
+### Build Prod Version
+
+```
+npm run build
+```
+
+### Works:
+1. Edge
+2. Chrome 70.
+3. Firefox 62.
+4. Opera 56
+

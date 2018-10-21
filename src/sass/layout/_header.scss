@@ -1,0 +1,22 @@
+@import "../utils/variable";
+
+.header {
+    padding: $header-padding;
+    border-bottom: $border-height dashed $border-color;
+    margin-bottom: $header-margin-bottom;
+
+    &__title {
+        font-size: $header-font-size;
+        font-weight: bold;
+    }
+
+    &__logo {
+        background-color: $logo-background;
+        width: $logo-box;
+        height: $logo-box;
+        display: inline-block;
+        text-align: right;
+        padding-top: $logo-padding-top;
+        box-sizing: border-box;
+    }
+}

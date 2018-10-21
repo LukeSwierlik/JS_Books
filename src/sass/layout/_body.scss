@@ -1,0 +1,7 @@
+@import "../utils/_variable.scss";
+
+.body {
+    background-color: $body-background;
+    font-size: $body-font-size;
+    position: relative;
+}

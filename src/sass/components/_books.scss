@@ -1,0 +1,98 @@
+@import "../utils/mixins";
+
+.books {
+    @include breakpoint(mobile-horizontal) {
+        padding: 0 24px;
+        box-sizing: border-box;
+        width: 100%;
+        display: block;
+    }
+
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    align-items: center;
+    list-style: none;
+    counter-reset: item;
+
+    .book {
+        @include breakpoint(mobile-horizontal) {
+            margin-left: 0;
+            padding-top: 0;
+        }
+
+        text-align: center;
+        margin-bottom: 64px;
+        counter-increment: item;
+        position: relative;
+        padding-left: 24px;
+        padding-top: 24px;
+        margin-left: 64px;
+
+        &:before {
+            content: counter(item);
+            color: #D8D7D7;
+            font-size: 3rem;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        &__wrapper {
+            @include breakpoint(mobile-horizontal) {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+            }
+
+            @include breakpoint(mobile) {
+                display: block;
+            }
+        }
+
+        &__cover {
+            margin-bottom: 16px;
+        }
+
+        &__title {
+            @include breakpoint(tablet) {
+                max-width: 250px;
+            }
+
+            @include breakpoint(mobile) {
+                max-width: 100%;
+            }
+
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        &__line {
+            width: 20%;
+            height: 3px;
+            background: #EB3324;
+            display: inline-block;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        &__author {
+            margin-bottom: 16px;
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+
+        &__details {
+            color: #999999;
+            font-style: italic;
+            font-size: 0.8rem;
+        }
+
+        &__link {
+            color: #EB3324;
+        }
+    }
+}

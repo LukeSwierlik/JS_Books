@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Książki o Javascript</title>
+
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    </head>
+
+    <body class="body">
+        <!-- header -->
+        <header class="header">
+            <h1 class="header__title"><span class="header__logo">JS</span>’owe książki</h1>
+        </header>
+        <!-- /header -->
+
+
+        <!-- container -->
+        <section class="container">
+            <!-- sidebar filters -->
+            <aside class="sidebar filters">
+                <!-- filter -->
+                <div class="filter">
+                    <div class="filter__title-wrapper">
+                        <h2 class="filter__title">Sortuj po</h2>
+                    </div>
+
+                    <div class="filter__options-wrapper">
+                        <ul class="filter__options">
+                            <li class="filter__option">
+                                <label for="count-pages">
+                                    <input name="sort" type="radio" id="count-pages" value="count-pages" class="filter__radio"/> <span>ilości stron</span>
+                                </label>
+                            </li>
+
+                            <li class="filter__option">
+                                <label for="release-data">
+                                    <input name="sort" type="radio" id="release-data" value="release-data" class="filter__radio"/> <span>dacie wydania</span>
+                                </label>
+                            </li>
+
+                            <li class="filter__option">
+                                <label for="lastName-author">
+                                    <input name="sort" type="radio" id="lastName-author" value="lastName-author" class="filter__radio"/> <span>nazwisku autora</span>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /filter -->
+
+                <!-- filter -->
+                <div class="filter">
+                    <div class="filter__title-wrapper">
+                        <h2 class="filter__title">Pokaż tylko</h2>
+                    </div>
+
+                    <div class="filter__options-wrapper">
+                        <ul class="filter__options">
+                            <li class="filter__option">
+                                Powyżej <input type="number" class="filter__pages"> stron
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /filter -->
+
+                <div class="filters__button">
+                    <button type="button" class="filters__clear">Wyczyść</button>
+                </div>
+            </aside>
+            <!-- /sidebar filters -->
+
+            <main class="main">
+                <ol class="books"></ol>
+            </main>
+        </section>
+        <!-- /container -->
+
+        <!-- footer -->
+        <footer> </footer>
+        <!-- /footer -->
+
+        <div class="lightbox"></div>
+    </body>
+</html>
