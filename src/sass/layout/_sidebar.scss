@@ -46,5 +46,33 @@
         display: block;
         font-weight: bold;
         cursor: pointer;
+
+        &:hover {
+            background-color: #49A6A6;
+        }
+    }
+
+    .filter__radio {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        display: inline-block;
+        position: relative;
+        background-color: #ffffff;
+        color: #666;
+        top: 3px;
+        height: 15px;
+        width: 15px;
+        border: 0;
+        border-radius: 50%;
+        cursor: pointer;
+        margin-right: 7px;
+        outline: none;
+    }
+    .filter__radio:hover {
+        background-color: #70C0C0;
+    }
+    .filter__radio:checked {
+        background-color: #49A6A6;
     }
 }

@@ -1,6 +1,10 @@
 @import "../utils/mixins";
 
 .books {
+    @include breakpoint(tablet) {
+        justify-content: center;
+    }
+
     @include breakpoint(mobile-horizontal) {
         padding: 0 24px;
         box-sizing: border-box;
@@ -16,6 +20,11 @@
     counter-reset: item;
 
     .book {
+        @include breakpoint(tablet) {
+            &:nth-child(odd) {
+                margin-left: 0;
+            }
+        }
         @include breakpoint(mobile-horizontal) {
             margin-left: 0;
             padding-top: 0;
