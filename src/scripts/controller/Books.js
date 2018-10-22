@@ -1,8 +1,7 @@
-import booksData from "../../books";
 import Book from "../models/Book";
 import {renderBook} from "../view/bookView";
 
-export const controlBooks = () => {
+export const controlBooks = (booksData) => {
     const newBooks = Array.from(booksData);
     const books = [];
 

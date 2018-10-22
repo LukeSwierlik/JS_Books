@@ -8,7 +8,7 @@ const compareReleaseData = (a, b) => {
     const releaseDataA = new Date(a.releaseDate.years , a.releaseDate.month, 1);
     const releaseDataB = new Date(b.releaseDate.years , b.releaseDate.month, 1);
 
-    return  releaseDataA - releaseDataB;
+    return releaseDataA - releaseDataB;
 };
 
 const compareLastNameAuthor = (a, b) => {

@@ -27,7 +27,7 @@
 
         &__pages {
             width: $filter-pages-width;
-            border-radius: 5$filter-pages-border-radius;
+            border-radius: $filter-pages-border-radius;
             border: $border-height solid $border-color;
             padding: $filter-padding;
             box-sizing: border-box;

@@ -5,6 +5,7 @@ import {clearBooks, renderBooks} from "./view/bookView";
 import {elements} from "./elements";
 import {renderLightBox} from "./view/lightboxView";
 import {selectors} from "./constants/constants";
+import booksData from "../books.json";
 
 const STATE = {
     originalBooks: [],
@@ -19,7 +20,6 @@ const STATE = {
 
 const showCover = () => {
     const coverElement = [...document.querySelectorAll(selectors.COVER)];
-    console.log('coverElement', coverElement);
 
     if (coverElement.length) {
         coverElement.forEach(element => {
@@ -64,7 +64,7 @@ const readSaveFilters = (filersLocalStorage, originalBooks) => {
 };
 
 window.addEventListener('load', () => {
-    STATE.originalBooks = controlBooks();
+    STATE.originalBooks = controlBooks(booksData);
     STATE.isLoading = false;
 
     const filersLocalStorage = JSON.parse(localStorage.getItem('filters'));
