@@ -45,13 +45,12 @@ export const filtersPage = (value, originalBooks) => {
     return [...filterBooks];
 };
 
-
 export const saveFilters = (filtersBook) => {
     const filtersValue = JSON.stringify(filtersBook);
 
-    localStorage.setItem('filters', filtersValue);
+    sessionStorage.setItem('filters', filtersValue);
 };
 
-export const deleteFilters = () => {
-    localStorage.removeItem('filters');
+export const resetFilters = () => {
+    sessionStorage.removeItem('filters');
 };

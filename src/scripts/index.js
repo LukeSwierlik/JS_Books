@@ -1,5 +1,5 @@
 import '../sass/main.scss';
-import {orderByOption, filtersPage, saveFilters, deleteFilters} from "./service/FiltersService";
+import {orderByOption, filtersPage, saveFilters, resetFilters} from "./service/FiltersService";
 import {controlBooks} from './controller/Books';
 import {clearBooks, renderBooks} from "./view/bookView";
 import {elements} from "./elements";
@@ -65,9 +65,10 @@ const readSaveFilters = (filersLocalStorage, originalBooks) => {
 
 window.addEventListener('load', () => {
     STATE.originalBooks = controlBooks(booksData);
+    STATE.filtersBookPages = STATE.originalBooks;
     STATE.isLoading = false;
 
-    const filersLocalStorage = JSON.parse(localStorage.getItem('filters'));
+    const filersLocalStorage = JSON.parse(sessionStorage.getItem('filters'));
 
     if (filersLocalStorage) {
         readSaveFilters(filersLocalStorage, STATE.originalBooks);
@@ -98,7 +99,6 @@ elements.filterPages.addEventListener('change', ({target}) => {
     const pages = parseInt(value, 10);
 
     clearBooks();
-    console.log('pages', pages);
 
     STATE.filtersBook.valueFiltersPage = pages;
     STATE.filtersBookPages = filtersPage(pages, STATE.originalBooks);
@@ -110,10 +110,11 @@ elements.filterPages.addEventListener('change', ({target}) => {
 
 const clearFilters = () => {
     clearBooks();
-    deleteFilters();
+    resetFilters();
     elements.filterPages.value = '';
+
     STATE.filtersBookPages = STATE.originalBooks;
-    controlBooks(STATE.originalBooks);
+    controlBooks(booksData);
     showCover();
 };
 
