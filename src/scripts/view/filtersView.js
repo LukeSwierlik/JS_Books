@@ -8,7 +8,9 @@ class FiltersView {
     }
 
     formGroupListener() {
-        [...elements.sort].forEach(option => {
+        const radioElementListWithNodeList = [...elements.sort];
+
+        radioElementListWithNodeList.forEach(option => {
             option.addEventListener('click', this.controller);
         });
     }

@@ -3,8 +3,6 @@ import { filters_option } from "../constants/constants";
 
 class FilterService {
     constructor() {
-        this.orderFiltersValue = '';
-        this.filtersPageValue = 0;
     }
 
     comparePages(a, b) {

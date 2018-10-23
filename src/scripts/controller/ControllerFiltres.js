@@ -78,10 +78,10 @@ class ControllerFiltres {
     }
 
     showLightBox() {
-        const coverElement = [...document.querySelectorAll(selectors.COVER)];
+        const coverElementsListWithNodeList = [...document.querySelectorAll(selectors.COVER)];
     
-        if (coverElement.length) {
-            coverElement.forEach(element => {
+        if (coverElementsListWithNodeList.length) {
+            coverElementsListWithNodeList.forEach(element => {
                 element.addEventListener('click', (event) => {
                     const coverLarge = event.target.closest(selectors.COVER).dataset.cover;
                     elements.lightbox.classList.add('lightbox--active');
@@ -113,7 +113,8 @@ class ControllerFiltres {
         if(radioOptionFiltersWithStorage) {
             this.clickHandler(radioOptionFiltersWithStorage);
 
-            [...elements.sort].forEach(option => {
+            const radioElementListWithNodeList = [...elements.sort];
+            radioElementListWithNodeList.forEach(option => {
                 if(option.value === radioOptionFiltersWithStorage) {
                     option.checked = true;
                 }
@@ -123,7 +124,9 @@ class ControllerFiltres {
 
     resetInputsFilters() {
         elements.filterPages.value = '';
-        [...elements.sort].forEach(option => option.checked = false);
+
+        const radioElementListWithNodeList = [...elements.sort];
+        radioElementListWithNodeList.forEach(option => option.checked = false);
     }
 
     resetFilters() {

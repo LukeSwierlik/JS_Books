@@ -36,10 +36,15 @@
 
     .center {
         margin: 0;
-        position: absolute;
+        position: fixed;
         top: $lightbox-center-position-and-translate;
         left: $lightbox-center-position-and-translate;
         transform: translate(-$lightbox-center-position-and-translate, -$lightbox-center-position-and-translate);
+        width: 70%;
+
+        @include breakpoint(mobile-horizontal) {
+            width: auto;
+        }
     }
 
     &__button {
