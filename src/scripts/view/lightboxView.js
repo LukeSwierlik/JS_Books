@@ -23,7 +23,7 @@ class LightBoxView {
                 
                 
                 <div class="lightbox__close">
-                    <div class="close heavy"></div>
+                    <div class="lightbox__button heavy"></div>
                 </div>
             </div>
         `;

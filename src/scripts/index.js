@@ -31,3 +31,6 @@ window.addEventListener('load', () => {
 
     viewFiltres.init();
 });
+
+
+

@@ -42,7 +42,8 @@
         }
 
         @include breakpoint(desktop) {
-            margin-left: 64px;
+            margin-left: 0;
+            width: 33.3%;
         }
 
         .book_wrapper_counter {
