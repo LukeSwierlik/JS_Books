@@ -1,9 +1,15 @@
 @import "../utils/mixins";
 
 .container {
+    display: block;
+
     @include breakpoint(tablet) {
-        display: block;
+        display: flex;
     }
 
-    display: flex;
+    .main {
+        @include breakpoint(tablet) {
+            flex: 1;
+        }
+    }
 }

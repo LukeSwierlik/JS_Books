@@ -1,56 +1,57 @@
 import { filters_option } from "../constants/constants";
 
-const comparePages = (a, b) => {
-    return a.pages - b.pages;
-};
 
-const compareReleaseData = (a, b) => {
-    const releaseDataA = new Date(a.releaseDate.years , a.releaseDate.month, 1);
-    const releaseDataB = new Date(b.releaseDate.years , b.releaseDate.month, 1);
-
-    return releaseDataA - releaseDataB;
-};
-
-const compareLastNameAuthor = (a, b) => {
-    return a.author.lastName.localeCompare(b.author.lastName);
-};
-
-export const orderByOption = (value, books) => {
-    let newBooks = [];
-
-    switch(value) {
-        case filters_option.COUNT_PAGES: {
-            newBooks = books.sort(comparePages);
-            break;
-        }
-        case filters_option.RELEASE_DATA: {
-            newBooks = books.sort(compareReleaseData);
-            break;
-        }
-        case filters_option.LAST_NAME_AUTHOR: {
-            newBooks = books.sort(compareLastNameAuthor);
-            break;
-        }
-        default: {
-            break;
-        }
+class FilterService {
+    constructor() {
+        this.orderFiltersValue = '';
+        this.filtersPageValue = 0;
     }
 
-    return newBooks;
-};
+    comparePages(a, b) {
+        return a.pages - b.pages;
+    };
 
-export const filtersPage = (value, originalBooks) => {
-    const filterBooks = originalBooks.filter(book => book.pages >= value);
+    compareReleaseData (a, b) {
+        const releaseDataA = new Date(a.releaseDate.years , a.releaseDate.month, 1);
+        const releaseDataB = new Date(b.releaseDate.years , b.releaseDate.month, 1);
+    
+        return releaseDataA - releaseDataB;
+    };
 
-    return [...filterBooks];
-};
+    compareLastNameAuthor (a, b) {
+        return a.author.lastName.localeCompare(b.author.lastName);
+    };
 
-export const saveFilters = (filtersBook) => {
-    const filtersValue = JSON.stringify(filtersBook);
+    orderByOption (value, books) {
+        let newBooks = [];
+    
+        switch(value) {
+            case filters_option.COUNT_PAGES: {
+                newBooks = books.sort(this.comparePages);
+                break;
+            }
+            case filters_option.RELEASE_DATA: {
+                newBooks = books.sort(this.compareReleaseData);
+                break;
+            }
+            case filters_option.LAST_NAME_AUTHOR: {
+                newBooks = books.sort(this.compareLastNameAuthor);
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+    
+        return newBooks;
+    };
 
-    sessionStorage.setItem('filters', filtersValue);
-};
+    filtersPage(value, originalBooks) {
+        const filterBooks = originalBooks.filter(book => book.pages >= value);
+    
+        return [...filterBooks];
+    };
+    
+}
 
-export const resetFilters = () => {
-    sessionStorage.removeItem('filters');
-};
+export default FilterService;

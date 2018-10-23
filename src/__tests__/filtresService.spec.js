@@ -1,10 +1,11 @@
 import {booksMock} from '../__mocks__/booksMock.js';
 import {filters_option} from "../scripts/constants/constants";
-import {orderByOption, filtersPage} from "../scripts/service/FiltersService";
+import FiltersService from "../scripts/service/FiltersService";
 import Book from "../scripts/models/Book";
 
 describe('test a methods filtresService', () => {
     let originalBooks = [];
+    const filtersService = new FiltersService();
 
     beforeEach(() => {
         originalBooks = [];
@@ -20,7 +21,7 @@ describe('test a methods filtresService', () => {
     it('test a method sort comparePages', () => {
         const valueSort = filters_option.COUNT_PAGES;
 
-        const filterBooks = orderByOption(valueSort, originalBooks)
+        const filterBooks = filtersService.orderByOption(valueSort, originalBooks)
             .map(book => book.pages);
 
         const expectValue = [166, 172, 254, 254, 334, 936];
@@ -31,7 +32,7 @@ describe('test a methods filtresService', () => {
     it('test a method sort releaseData', () => {
         const valueSort = filters_option.RELEASE_DATA;
 
-        const filterBooks = orderByOption(valueSort, originalBooks)
+        const filterBooks = filtersService.orderByOption(valueSort, originalBooks)
             .map(book => {
                 return {
                     releaseDate: {
@@ -56,7 +57,7 @@ describe('test a methods filtresService', () => {
     it('test a method sort compareLastNameAuthor', () => {
         const valueSort = filters_option.LAST_NAME_AUTHOR;
 
-        const filterBooks = orderByOption(valueSort, originalBooks)
+        const filterBooks = filtersService.orderByOption(valueSort, originalBooks)
             .map(book => {
                 return {
                     author: {
@@ -81,7 +82,7 @@ describe('test a methods filtresService', () => {
     it('test a method filtersPage', () => {
         const value = 200;
 
-        const filtersBook = filtersPage(value, originalBooks);
+        const filtersBook = filtersService.filtersPage(value, originalBooks);
 
         const expectValue = 4;
 

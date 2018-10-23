@@ -1,44 +1,57 @@
 @import "../utils/mixins";
 
 .books {
-    @include breakpoint(tablet) {
-        justify-content: center;
-    }
-
-    @include breakpoint(mobile-horizontal) {
-        padding: 0 24px;
-        box-sizing: border-box;
-        width: 100%;
-        display: block;
-    }
-
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    align-items: center;
+    padding: 0 24px;
+    box-sizing: border-box;
+    width: 100%;
+    display: block;
     list-style: none;
     counter-reset: item;
 
+    @include breakpoint(mobile-horizontal) {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 1200px;
+        align-items: start;
+        justify-content: space-around;
+    }
+
+    @include breakpoint(tablet-horizontal) {
+        justify-content: flex-start;
+    }
+
     .book {
+        margin-left: 0;
+        padding-top: 0;
+        text-align: center;
+        margin-bottom: 64px;
+        counter-increment: item;
+        position: relative;
+
+        @include breakpoint(mobile-horizontal) {
+            padding-top: 32px;
+            width: 50%;
+            box-sizing: border-box;
+            padding-left: 24px;
+        }
+
         @include breakpoint(tablet) {
             &:nth-child(odd) {
                 margin-left: 0;
             }
         }
-        @include breakpoint(mobile-horizontal) {
-            margin-left: 0;
-            padding-top: 0;
+
+        @include breakpoint(desktop) {
+            margin-left: 64px;
         }
 
-        text-align: center;
-        margin-bottom: 64px;
-        counter-increment: item;
-        position: relative;
-        padding-left: 24px;
-        padding-top: 24px;
-        margin-left: 64px;
+        .book_wrapper_counter {
+            width: 100%;
+            position: relative;
+            margin: 0 auto;
+        }
 
-        &:before {
+        .book_wrapper_counter:before {
             content: counter(item);
             color: #D8D7D7;
             font-size: 3rem;
@@ -49,14 +62,19 @@
         }
 
         &__wrapper {
-            @include breakpoint(mobile-horizontal) {
+            display: block;
+
+            @include breakpoint(mobile) {
                 display: flex;
                 align-items: center;
                 justify-content: space-around;
+                padding-left: 40px;
             }
 
-            @include breakpoint(mobile) {
+            @include breakpoint(mobile-horizontal) {
                 display: block;
+                padding-top: 32px;
+                padding-left: 0;
             }
         }
 
@@ -65,18 +83,19 @@
         }
 
         &__title {
-            @include breakpoint(tablet) {
-                max-width: 250px;
-            }
-
-            @include breakpoint(mobile) {
-                max-width: 100%;
-            }
-
+            max-width: 100%;
             font-size: 1.2rem;
             font-weight: bold;
             margin-bottom: 16px;
             position: relative;
+
+            @include breakpoint(mobile) {
+                max-width: 250px;
+            }
+
+            @include breakpoint(mobile-horizontal) {
+                max-width: 100%;
+            }
         }
 
         &__line {

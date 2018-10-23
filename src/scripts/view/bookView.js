@@ -1,52 +1,55 @@
 import {elements} from "../elements";
 
+class BookView {
+    constructor(book) {
+        this.book = book;
+    }
 
-export const clearBooks = () => {
-    elements.books.innerHTML = '';
-};
+    render() {
+        const { cover, title, author, releaseDate, pages, link} = this.book;
 
-export const renderBooks = (books) => {
-    books.forEach(book => {
-        renderBook(book);
-    });
-};
-
-export const renderBook = (book) => {
-    const markup = `
-        <li class="book">
-            <div class="book__wrapper">
-                <div class="book__cover" data-cover="${book.cover.large}">
-                      <img src="${book.cover.small}">
+        const markup = `
+            <li class="book">
+                <div class="book_wrapper_counter">
+                    <div class="book__wrapper">
+                        <div class="book__cover" data-cover="${cover.large}">
+                            <img src="${cover.small}">
+                        </div>
+                        
+                        <!-- book__description -->
+                        <div class="book__description">
+                            <div class="book__title">
+                                <span>${title}</span>
+                            </div>
+                
+                            <div class="book__line"></div>
+                
+                            <div class="book__author">
+                                <span>By ${author.firstName} ${author.lastName}</span>
+                            </div>
+                
+                            <div class="book__details">
+                                <div class="book__release">
+                                    <span>Release Date: ${releaseDate.month}/${releaseDate.years}</span>
+                                </div>
+                
+                                <div class="book__pages">
+                                    <span>Pages: ${pages}</span>
+                                </div>
+                
+                                <div class="book__wrapper-link">
+                                    <span>Link: <a href="${link}" class="book__link" target="_blank">shop</a></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /book__description -->
+                    </div>
                 </div>
-        
-                <div class="book__description">
-                    <div class="book__title">
-                        <span>${book.title}</span>
-                    </div>
-        
-                    <div class="book__line"></div>
-        
-                    <div class="book__author">
-                        <span>By ${book.author.firstName} ${book.author.lastName}</span>
-                    </div>
-        
-                    <div class="book__details">
-                        <div class="book__release">
-                            <span>Release Date: ${book.releaseDate.month}/${book.releaseDate.years}</span>
-                        </div>
-        
-                        <div class="book__pages">
-                            <span>Pages: ${book.pages}</span>
-                        </div>
-        
-                        <div class="book__wrapper-link">
-                            <span>Link: <a href="${book.link}" class="book__link" target="_blank">shop</a></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </li>
-    `;
+            </li>
+        `;
 
-    elements.books.insertAdjacentHTML('beforeend', markup);
-};
+        elements.books.insertAdjacentHTML('beforeend', markup);
+    }
+}
+
+export default BookView;

@@ -1,134 +1,33 @@
 import '../sass/main.scss';
-import {orderByOption, filtersPage, saveFilters, resetFilters} from "./service/FiltersService";
-import {controlBooks} from './controller/Books';
-import {clearBooks, renderBooks} from "./view/bookView";
-import {elements} from "./elements";
-import {renderLightBox} from "./view/lightboxView";
-import {selectors} from "./constants/constants";
+import ControllerBook from './controller/ControllerBook';
 import booksData from "../books.json";
+import ModelBooks from "./models/Books";
+import FiltersService from './service/FiltersService';
+import ModelFiltres from './models/Filters';
+import ControllerFiltres from './controller/ControllerFiltres';
+import FiltersView from './view/filtersView';
+import StorageService from './service/StorageService';
 
-const STATE = {
-    originalBooks: [],
-    filtersBookPages: [],
-    isLoading: true,
-    filtersBook: {
-        valueFiltersPage: 0,
-        filtersOption: '',
-        isFilter: false
-    }
-};
 
-const showCover = () => {
-    const coverElement = [...document.querySelectorAll(selectors.COVER)];
+// BOOK
+const modelBooks = new ModelBooks();
+const filtersService = new FiltersService();
+const controllerBook = new ControllerBook(modelBooks, filtersService);
 
-    if (coverElement.length) {
-        coverElement.forEach(element => {
-            element.addEventListener('click', (event) => {
-                const coverLarge = event.target.closest(selectors.COVER).dataset.cover;
-                elements.lightbox.classList.add('lightbox--active');
+const storage = new StorageService(sessionStorage);
 
-                renderLightBox(coverLarge);
-            });
-        });
-    }
-};
-
-const readSaveFilters = (filersLocalStorage, originalBooks) => {
-    const {valueFiltersPage, filtersOption} = filersLocalStorage;
-    STATE.filtersBookPages = [...STATE.originalBooks];
-
-    if (valueFiltersPage) {
-        STATE.filtersBookPages = filtersPage(valueFiltersPage, originalBooks);
-        elements.filterPages.value = valueFiltersPage;
-
-        STATE.filtersBook.isFilter = true;
-        STATE.filtersBook.valueFiltersPage = parseInt(valueFiltersPage, 10);
-    }
-
-    if (filtersOption) {
-        STATE.filtersBookPages = orderByOption(filtersOption, STATE.filtersBookPages);
-        STATE.filtersBook.isFilter = true;
-
-        [...elements.sort].forEach(option => {
-            if(option.value === filtersOption) {
-                option.checked = true;
-            }
-        });
-    }
-
-    if (STATE.filtersBook.isFilter) {
-        clearBooks();
-        renderBooks(STATE.filtersBookPages);
-    }
-
-};
 
 window.addEventListener('load', () => {
-    STATE.originalBooks = controlBooks(booksData);
-    STATE.filtersBookPages = STATE.originalBooks;
-    STATE.isLoading = false;
+    controllerBook.loadBooksWithJSON(booksData);
 
-    const filersLocalStorage = JSON.parse(sessionStorage.getItem('filters'));
+    // FILTRES
+    const modelFiltres = new ModelFiltres();
+    const controllerFiltres = new ControllerFiltres(modelFiltres, filtersService, modelBooks, storage);
+    const viewFiltres = new FiltersView(controllerFiltres);
 
-    if (filersLocalStorage) {
-        readSaveFilters(filersLocalStorage, STATE.originalBooks);
-    }
+    controllerFiltres.renderBooks(modelBooks.books);
+    controllerFiltres.loadFiltersWithStorage();
 
-    if (!STATE.isLoading) {
-        showCover();
-    }
+
+    viewFiltres.init();
 });
-
-[...elements.sort].forEach(option => {
-    option.addEventListener('click', ({target}) => {
-        const {value} = target;
-
-        clearBooks();
-
-        STATE.filtersBook.filtersOption = value;
-        const filterBooks = orderByOption(value, STATE.filtersBookPages);
-
-        renderBooks(filterBooks);
-        showCover();
-        saveFilters(STATE.filtersBook);
-    });
-});
-
-elements.filterPages.addEventListener('change', ({target}) => {
-    const {value} = target;
-    const pages = parseInt(value, 10);
-
-    clearBooks();
-
-    STATE.filtersBook.valueFiltersPage = pages;
-    STATE.filtersBookPages = filtersPage(pages, STATE.originalBooks);
-
-    renderBooks(STATE.filtersBookPages);
-    showCover();
-    saveFilters(STATE.filtersBook);
-});
-
-const clearFilters = () => {
-    clearBooks();
-    resetFilters();
-    elements.filterPages.value = '';
-
-    STATE.filtersBookPages = STATE.originalBooks;
-    controlBooks(booksData);
-    showCover();
-};
-
-elements.filtersClear.addEventListener('click', () => {
-    clearFilters();
-});
-
-
-const keyPressed = (event) => {
-    // leftAlt + r
-    if(event.altKey && event.which === 82) {
-        clearFilters();
-    }
-};
-
-window.addEventListener('keyup', keyPressed);
-

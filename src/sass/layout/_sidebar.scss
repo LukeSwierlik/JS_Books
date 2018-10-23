@@ -2,14 +2,14 @@
 @import "../utils/mixins";
 
 .filters {
-    @include breakpoint(tablet) {
-        width: $filters-width-tablet;
-        margin-bottom: $filters-margin-bottom-table;
-    }
-
-    padding: $filters-padding-horizontal;
-    width: $filters-width;
+    width: $filters-width-tablet;
     box-sizing: border-box;
+    margin-bottom: $filters-margin-bottom-table;
+    padding: $filters-padding-horizontal;
+
+    @include breakpoint(tablet) {
+        width: $filters-width;
+    }
 
     .filter {
         margin-bottom: $filter-margin-bottom;
