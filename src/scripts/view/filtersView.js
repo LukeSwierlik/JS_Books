@@ -21,6 +21,7 @@ class FiltersView {
 
     buttonClearListener() {
         this.buttonClear.addEventListener('click', this.controller);
+        window.addEventListener('keydown', this.controller);
     }
 
     init() {

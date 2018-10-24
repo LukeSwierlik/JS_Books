@@ -32,6 +32,14 @@ class ControllerFiltres {
                 this.saveFiltersToStorage();
                 break;
             }
+            case 'keydown': {
+                const keyCodeR = 82;
+
+                if(event.altKey && event.which === keyCodeR){
+                    this.resetFilters();
+                }
+                break;
+            }
             default: {
                 break;
             }
